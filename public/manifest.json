@@ -1,0 +1,17 @@
+{
+  "name": "The Polyglot Hub",
+  "short_name": "Polyglot Hub",
+  "description": "A personal study journal for becoming a true polyglot.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f2ecdd",
+  "theme_color": "#f2ecdd",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

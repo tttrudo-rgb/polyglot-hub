@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --color-paper: #f2ecdd;
+  --color-paper-raised: #e9e1cc;
+  --color-ink: #23211c;
+  --color-ink-soft: #5a5648;
+  --color-red: #a8402f;
+  --color-blue: #2e4a5e;
+  --color-green: #4b6b4a;
+  --color-gold: #b8893b;
+
+  --font-display: Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif;
+  --font-label: "Courier New", Courier, monospace;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-raised: var(--color-paper-raised);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-red: var(--color-red);
+  --color-blue: var(--color-blue);
+  --color-green: var(--color-green);
+  --color-gold: var(--color-gold);
+  --font-display: var(--font-display);
+  --font-label: var(--font-label);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-label);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+}
+
+.paper-card {
+  background: var(--color-paper-raised);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 15%, transparent);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--color-ink) 8%, transparent);
+}
+
+input,
+select,
+textarea {
+  font-family: var(--font-label);
+}
