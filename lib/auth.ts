@@ -1,6 +1,20 @@
 import { createHash, timingSafeEqual } from "node:crypto";
+import type { NextRequest } from "next/server";
 
 export const AUTH_COOKIE = "ph_auth";
+
+/**
+ * Behind Railway's proxy, request.url reflects the container's internal
+ * bind address (e.g. localhost:8080), not the public hostname. Reconstruct
+ * the real origin from forwarded headers so redirects point somewhere the
+ * client can actually reach.
+ */
+export function getRequestOrigin(request: NextRequest): string {
+  const forwardedHost = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  const forwardedProto = request.headers.get("x-forwarded-proto") ?? "https";
+  if (forwardedHost) return `${forwardedProto}://${forwardedHost}`;
+  return new URL(request.url).origin;
+}
 
 export function hashPassword(password: string): string {
   return createHash("sha256").update(password).digest("hex");

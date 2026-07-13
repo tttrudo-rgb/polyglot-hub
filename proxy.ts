@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { AUTH_COOKIE, getExpectedAuthToken, safeEqual } from "./lib/auth";
+import { AUTH_COOKIE, getExpectedAuthToken, getRequestOrigin, safeEqual } from "./lib/auth";
 
 export function proxy(request: NextRequest) {
   const expected = getExpectedAuthToken();
@@ -10,7 +10,7 @@ export function proxy(request: NextRequest) {
   const cookie = request.cookies.get(AUTH_COOKIE)?.value;
   if (cookie && safeEqual(cookie, expected)) return NextResponse.next();
 
-  const loginUrl = new URL("/login", request.url);
+  const loginUrl = new URL("/login", getRequestOrigin(request));
   loginUrl.searchParams.set("from", request.nextUrl.pathname);
   return NextResponse.redirect(loginUrl);
 }
